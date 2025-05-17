@@ -1,0 +1,297 @@
+{
+  "Scenario 01": {
+    "scenario_name": "ACC Following - Clear Day - Highway - Constant Speed",
+    "environment": {
+      "weather": "Clear",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "traffic_density": "Medium"
+    },
+    "ego_vehicle": {
+      "type": "Sedan",
+      "initial_speed": 25,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 1.0
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 25,
+        "lane": "Center",
+        "distance_ahead": 50,
+        "behavior": "Constant speed"
+      }
+    ],
+    "trigger": "Lead vehicle maintains constant speed.",
+    "expected_outcome": "Ego vehicle maintains a constant following distance corresponding to the selected ACC gap (1.0 second)."
+  },
+  "Scenario 02": {
+    "scenario_name": "ACC Following - Clear Day - Highway - Lead Vehicle Slows Down",
+    "environment": {
+      "weather": "Clear",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "traffic_density": "Medium"
+    },
+    "ego_vehicle": {
+      "type": "Sedan",
+      "initial_speed": 25,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 1.0
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 25,
+        "lane": "Center",
+        "distance_ahead": 50,
+        "behavior": "Decelerates to 15 m/s at a rate of 2 m/s^2"
+      }
+    ],
+    "trigger": "Lead vehicle decelerates.",
+    "expected_outcome": "Ego vehicle decelerates smoothly to maintain the selected ACC gap (1.0 second) without exceeding a comfortable deceleration rate."
+  },
+  "Scenario 03": {
+    "scenario_name": "ACC Following - Clear Day - Highway - Lead Vehicle Accelerates",
+    "environment": {
+      "weather": "Clear",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "traffic_density": "Medium"
+    },
+    "ego_vehicle": {
+      "type": "Sedan",
+      "initial_speed": 20,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 1.5
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 20,
+        "lane": "Center",
+        "distance_ahead": 60,
+        "behavior": "Accelerates to 30 m/s at a rate of 1 m/s^2"
+      }
+    ],
+    "trigger": "Lead vehicle accelerates.",
+    "expected_outcome": "Ego vehicle accelerates smoothly to maintain the selected ACC gap (1.5 seconds) without exceeding a comfortable acceleration rate."
+  },
+  "Scenario 04": {
+    "scenario_name": "ACC Following - Rain - Highway - Lead Vehicle Slows Down Abruptly",
+    "environment": {
+      "weather": "Rain",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "traffic_density": "High",
+      "road_condition": "Wet"
+    },
+    "ego_vehicle": {
+      "type": "SUV",
+      "initial_speed": 30,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 2.0
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 30,
+        "lane": "Center",
+        "distance_ahead": 70,
+        "behavior": "Decelerates to 5 m/s at a rate of 5 m/s^2"
+      }
+    ],
+    "trigger": "Lead vehicle decelerates abruptly.",
+    "expected_outcome": "Ego vehicle decelerates rapidly to maintain the selected ACC gap (2.0 seconds), potentially engaging emergency braking if necessary to avoid a collision. The deceleration rate should be adjusted based on road conditions (wet)."
+  },
+  "Scenario 05": {
+    "scenario_name": "ACC Following - Night - Highway - Lead Vehicle Changes Lane",
+    "environment": {
+      "weather": "Clear",
+      "lighting": "Night",
+      "road_type": "Highway",
+      "traffic_density": "Low"
+    },
+    "ego_vehicle": {
+      "type": "Sedan",
+      "initial_speed": 28,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 1.2
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 28,
+        "lane": "Center",
+        "distance_ahead": 65,
+        "behavior": "Changes lane to the right after 5 seconds."
+      }
+    ],
+    "trigger": "Lead vehicle changes lane.",
+    "expected_outcome": "Ego vehicle maintains its speed if no other vehicle is detected in the ego lane. If another vehicle is detected after the lane change of the lead vehicle, then the ego vehicle should adjust its speed to maintain the desired gap to the new lead vehicle."
+  },
+  "Scenario 06": {
+    "scenario_name": "ACC Following - Sunny - Highway - Cut-in Vehicle",
+    "environment": {
+      "weather": "Sunny",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "traffic_density": "Medium"
+    },
+    "ego_vehicle": {
+      "type": "Sedan",
+      "initial_speed": 22,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 1.5
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 22,
+        "lane": "Center",
+        "distance_ahead": 55,
+        "behavior": "Maintains Constant Speed"
+      },
+      {
+        "type": "Vehicle",
+        "id": "cut_in_vehicle",
+        "initial_speed": 25,
+        "lane": "Left",
+        "distance_ahead": 70,
+        "lateral_offset": 3.7,
+        "behavior": "Changes lane to the center lane in front of the ego vehicle."
+      }
+    ],
+    "trigger": "Cut-in vehicle merges into the ego vehicle's lane.",
+    "expected_outcome": "Ego vehicle detects the cut-in vehicle and decelerates to maintain the selected ACC gap (1.5 seconds) from the cut-in vehicle."
+  },
+  "Scenario 07": {
+    "scenario_name": "ACC Following - Fog - Highway - Low Visibility - Lead Vehicle Decelerates",
+    "environment": {
+      "weather": "Fog",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "traffic_density": "Low",
+      "visibility": "Low"
+    },
+    "ego_vehicle": {
+      "type": "Truck",
+      "initial_speed": 18,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 2.5
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 18,
+        "lane": "Center",
+        "distance_ahead": 45,
+        "behavior": "Decelerates to 10 m/s at a rate of 1.5 m/s^2"
+      }
+    ],
+    "trigger": "Lead vehicle decelerates in low visibility conditions.",
+    "expected_outcome": "Ego vehicle decelerates smoothly, taking into account the reduced visibility and increased ACC gap (2.5 seconds), to maintain a safe following distance."
+  },
+  "Scenario 08": {
+    "scenario_name": "ACC Following - Clear Day - Curved Road - Lead Vehicle Maintains Speed",
+    "environment": {
+      "weather": "Clear",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "road_geometry": "Curved",
+      "curvature": 0.02,
+      "traffic_density": "Medium"
+    },
+    "ego_vehicle": {
+      "type": "Sedan",
+      "initial_speed": 27,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 1.0
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 27,
+        "lane": "Center",
+        "distance_ahead": 60,
+        "behavior": "Maintains constant speed along the curved road."
+      }
+    ],
+    "trigger": "Lead vehicle maintains constant speed on a curved road.",
+    "expected_outcome": "Ego vehicle maintains a constant following distance corresponding to the selected ACC gap (1.0 second) while navigating the curved road."
+  },
+  "Scenario 09": {
+    "scenario_name": "ACC Following - Varying ACC Gap - Lead Vehicle Maintains Speed",
+    "environment": {
+      "weather": "Clear",
+      "lighting": "Daylight",
+      "road_type": "Highway",
+      "traffic_density": "Low"
+    },
+    "ego_vehicle": {
+      "type": "Sedan",
+      "initial_speed": 25,
+      "lane": "Center",
+      "heading": 0,
+      "acc_gap": 1.0
+    },
+    "actors": [
+      {
+        "type": "Vehicle",
+        "id": "lead_vehicle",
+        "initial_speed": 25,
+        "lane": "Center",
+        "distance_ahead": 50,
+        "behavior": "Constant speed"
+      }
+    ],
+    "trigger": "Ego vehicle ACC gap setting changes during scenario (1.0 -> 1.5 -> 0.8).",
+    "expected_outcome": "Ego vehicle adjusts its following distance smoothly and safely according to the changes in the ACC gap setting."
+  },
+    "Scenario 10": {
+        "scenario_name": "ACC Following - Snow - Highway - Reduced Friction - Lead Vehicle Brakes Hard",
+        "environment": {
+          "weather": "Snow",
+          "lighting": "Daylight",
+          "road_type": "Highway",
+          "traffic_density": "Low",
+          "road_condition": "Snowy",
+          "friction_coefficient": 0.2
+        },
+        "ego_vehicle": {
+          "type": "SUV",
+          "initial_speed": 20,
+          "lane": "Center",
+          "heading": 0,
+          "acc_gap": 2.0
+        },
+        "actors": [
+          {
+            "type": "Vehicle",
+            "id": "lead_vehicle",
+            "initial_speed": 20,
+            "lane": "Center",
+            "distance_ahead": 40,
+            "behavior": "Decelerates to 0 m/s at a rate of 4 m/s^2"
+          }
+        ],
+        "trigger": "Lead vehicle brakes hard on a snowy road.",
+        "expected_outcome": "Ego vehicle decelerates, accounting for the reduced friction, to maintain the ACC gap. ABS and ESC systems may activate. Emergency braking may be triggered if a collision is imminent, but should avoid uncontrolled skidding."
+      }
+}
