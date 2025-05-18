@@ -1,0 +1,23 @@
+[
+    {
+        "scenario_name": "Pedestrian crosses suddenly on urban road - Day",
+        "environment": {"weather": "Clear", "road_type": "Urban", "time_of_day": "Day"},
+        "ego_vehicle": {"speed": 50, "lane": 1, "driver_reaction_time": "late"},
+        "actors": [{"type": "pedestrian", "position": "roadside", "action": "crosses unexpectedly", "distance": 20}],
+        "expected_behavior": "Ego vehicle applies emergency braking to stop before collision"
+    },
+    {
+        "scenario_name": "Pedestrian runs across highway - Night",
+        "environment": {"weather": "Clear", "road_type": "Highway", "time_of_day": "Night"},
+        "ego_vehicle": {"speed": 100, "lane": 1, "driver_reaction_time": "none"},
+        "actors": [{"type": "pedestrian", "position": "median", "action": "runs across", "distance": 30}],
+        "expected_behavior": "Ego vehicle triggers emergency braking immediately"
+    },
+    {
+        "scenario_name": "Pedestrian walks slowly across road in rain",
+        "environment": {"weather": "Rainy", "road_type": "Urban", "time_of_day": "Evening"},
+        "ego_vehicle": {"speed": 40, "lane": 1, "driver_reaction_time": "delayed"},
+        "actors": [{"type": "pedestrian", "position": "crosswalk", "action": "walks slowly", "distance": 15}],
+        "expected_behavior": "Ego vehicle stops safely before reaching the pedestrian"
+    }
+]
