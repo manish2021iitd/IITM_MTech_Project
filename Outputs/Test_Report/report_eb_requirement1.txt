@@ -1,0 +1,18 @@
+## Emergency Braking Test Report
+
+**Scenario Name**: Pedestrian crosses suddenly on urban road - Day  
+**Environment**: Urban road, daytime, clear weather  
+**Ego Vehicle Initial Speed**: ~40–50 km/h  
+**Pedestrian Action**: Unexpected crossing from sidewalk  
+**Sensor Detection**: Pedestrian detected at ~20 meters  
+**System Behavior**:  
+- Emergency braking triggered autonomously  
+- Ego vehicle decelerated smoothly  
+- No collision occurred  
+
+**Distance to Pedestrian at Stop**: Estimated ~2–3 meters  
+**Driver Reaction**: None (simulated autonomous behavior)
+
+**Test Outcome**: **Pass**  
+The system successfully triggered emergency braking upon detecting an unexpected pedestrian crossing. The vehicle came to a full stop before any collision, satisfying safety requirements.
+
